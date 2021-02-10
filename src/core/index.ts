@@ -1,4 +1,4 @@
 export * from './adapters';
-export * from './entities';
+export * from './entities/movie';
 export * from './frameworks';
 export * from './useCases';

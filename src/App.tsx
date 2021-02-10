@@ -1,11 +1,20 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import HomePage from './pages/Home';
+import HomePage from './presenters/Home';
+import {Provider} from 'react-redux';
+import {configureStore} from './core//frameworks/redux';
 
-export type AppProps = {};
+type AppProps = {
+  name: string;
+};
 
 const App: React.FC<AppProps> = () => {
-  return <HomePage />;
+  const store = configureStore();
+  return (
+    <Provider store={store}>
+      <HomePage />
+    </Provider>
+  );
 };
 
 export default App;
