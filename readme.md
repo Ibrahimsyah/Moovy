@@ -1,5 +1,5 @@
 # Moovy
-Movie and Catalog Hybrid Mobile Apps, built with Clean Architecture Guide by Uncle Bob approach. Written in Typescript
+Movie Catalog Hybrid Mobile Apps, built with Clean Architecture Guide by Uncle Bob approach. Written in Typescript
 
 ## Overview
 Building an mobile apps is not as simple as just writing a code, run it, and check if it fulfil the requirements. We need to create an apps architecture so our application will be highly readable, testable, scalable, and maintainable.
