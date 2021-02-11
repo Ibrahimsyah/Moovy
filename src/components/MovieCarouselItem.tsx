@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     color: Colors.primaryText,
     width: '100%',
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Poppins-Regular',
   },
   overview: {
