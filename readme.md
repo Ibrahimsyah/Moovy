@@ -11,4 +11,4 @@ There are so many architecture guides that we can follow when building an app, o
 - React Native
 - Axios for HTTP Client Library
 - Redux for state management library
-- Redux-thunk for redux middleware to handle asynchronous action
+- Redux-saga as redux middleware to handle asynchronous action
