@@ -2,6 +2,7 @@ import {Movie} from '../entities';
 
 export interface MovieApiService {
   getNowPlayingMovies: () => Promise<Movie[]>;
+  getPopularMovies: () => Promise<Movie[]>;
 }
 
 export class MovieInteractor {
@@ -13,5 +14,9 @@ export class MovieInteractor {
 
   async getNowPlayingMovies(): Promise<Movie[]> {
     return this.movieService.getNowPlayingMovies();
+  }
+
+  async getPopularMovies(): Promise<Movie[]> {
+    return this.movieService.getPopularMovies();
   }
 }

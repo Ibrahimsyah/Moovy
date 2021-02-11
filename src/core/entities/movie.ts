@@ -1,22 +1,22 @@
 class Movie {
-  id: Number;
-  title: String;
-  rating: Number;
-  overview: String;
-  poster_path: String;
+  id: number;
+  title: string;
+  rating: number;
+  overview: string;
+  poster: string;
 
   constructor(
-    id: Number,
-    title: String,
-    rating: Number,
-    overview: String,
-    poster_path: String,
+    id: number,
+    title: string,
+    rating: number,
+    overview: string,
+    poster: string,
   ) {
     this.id = id;
     this.title = title;
     this.rating = rating;
     this.overview = overview;
-    this.poster_path = poster_path;
+    this.poster = poster;
   }
 }
 
