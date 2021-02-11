@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
         data={movies.upcoming}
         loop={true}
         sliderWidth={viewportWidth - 2 * contentPadding}
-        itemWidth={1 * (viewportWidth - 2 * contentPadding)}
+        itemWidth={viewportWidth - 2 * contentPadding}
         renderItem={({item}: {item: Movie; index: number}) => (
           <MovieCarouselItem movie={item} key={item.id} />
         )}

@@ -25,9 +25,7 @@ const MovieCarouselItem: React.FC<MovieCarouselItemProps> = (props) => {
 };
 
 const styles = StyleSheet.create({
-  card: {
-    width: '100%',
-  },
+  card: {},
   thumbnail: {
     height: 170,
     resizeMode: 'cover',
@@ -38,7 +36,7 @@ const styles = StyleSheet.create({
     color: Colors.primaryText,
     width: '100%',
     fontSize: 18,
-    fontFamily: 'Poppins-Medium',
+    fontFamily: 'Poppins-Regular',
   },
   overview: {
     fontFamily: 'Poppins-Thin',
