@@ -1,27 +1,19 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Text, StyleSheet, FlatList, ScrollView} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import HorizontalMovieCard from '../components/HorizontalMovieCard';
 import VerticalMovieCard from '../components/VerticalMovieCard';
 import {Colors} from '../configs/styles';
 import StateTypes from '../core/adapters/redux/reducers/stateTypes';
-import {
-  getNowPlayingMoviesAction,
-  getPopularMoviesAction,
-} from '../core/adapters/redux/sagas';
+
 import {Movie} from '../core/entities';
+
+export const HomePageRoute = 'home';
 
 const HomePage: React.FC = () => {
   const movies: StateTypes['movies'] = useSelector(
     (state: StateTypes) => state.movies,
   );
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getNowPlayingMoviesAction());
-    dispatch(getPopularMoviesAction());
-  }, [dispatch]);
 
   const renderNowPlaying = ({item}: {item: Movie}) => {
     return <HorizontalMovieCard movie={item} />;

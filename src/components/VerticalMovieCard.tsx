@@ -16,10 +16,10 @@ const VerticalMovieCard: React.FC<VerticalMovieCardProps> = (props) => {
       onPress={() => console.log(movie.title)}>
       <Image source={{uri: movie.poster}} style={styles.thumbnail} />
       <View style={styles.movieDetail}>
-        <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+        <Text style={styles.title} numberOfLines={3} ellipsizeMode="tail">
           {movie.title}
         </Text>
-        <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">
+        <Text style={styles.description} numberOfLines={3} ellipsizeMode="tail">
           {movie.overview}
         </Text>
         <View style={styles.ratingContainer}>
@@ -27,6 +27,7 @@ const VerticalMovieCard: React.FC<VerticalMovieCardProps> = (props) => {
           <Text style={styles.rating}>{movie.rating}</Text>
           <Text style={{color: Colors.primaryText}}> / 10</Text>
         </View>
+        <Text style={styles.voteCount}>{movie.vote} Votes</Text>
       </View>
     </TouchableOpacity>
   );
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     marginVertical: 8,
+    marginTop: 'auto',
     alignItems: 'flex-end',
     color: Colors.primaryText,
   },
@@ -81,6 +83,10 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 20,
     color: Colors.primaryText,
+  },
+  voteCount: {
+    color: Colors.primaryText,
+    fontSize: 12,
   },
 });
 export default VerticalMovieCard;

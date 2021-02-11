@@ -1,4 +1,4 @@
-import {Movie} from '../../../entities';
+import {Genre, Movie} from '../../../entities';
 
 export default interface StateTypes {
   movies: {
@@ -7,4 +7,8 @@ export default interface StateTypes {
     top: Movie[];
     upcoming: Movie[];
   };
+  loading: {
+    initialData: boolean;
+  };
+  genre: Genre[];
 }

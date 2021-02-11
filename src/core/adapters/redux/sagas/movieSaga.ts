@@ -1,25 +1,21 @@
-import {takeLatest, all, put} from 'redux-saga/effects';
-import {Movie} from '../../../entities';
+import {takeLatest, all, put, call} from 'redux-saga/effects';
 import {MovieService} from '../../../services/apiService';
 import {MovieInteractor} from '../../../useCases';
-import {updateNowPlayingMovies, updatePopularMovies} from '../actions';
+import {
+  LoadingActionType,
+  updateInitialDataLoading,
+  updateNowPlayingMovies,
+  updatePopularMovies,
+} from '../actions';
+import {updateGenreData} from '../actions/genre';
 
-export const GET_NOW_PLAYING_MOVIES = 'GET_NOW_PLAYING_MOVIE';
-export const GET_POPULAR_MOVIES = 'GET_POPULAR_MOVIE';
+const GET_INITIAL_DATA = 'GET_INITIAL_DATA';
 
-interface MovieActionType {
-  type: string;
-  movies: Movie[];
-}
-
-export const getNowPlayingMoviesAction = (): MovieActionType => ({
-  type: GET_NOW_PLAYING_MOVIES,
-  movies: [],
-});
-
-export const getPopularMoviesAction = (): MovieActionType => ({
-  type: GET_POPULAR_MOVIES,
-  movies: [],
+export const getInitialDataAction = (): LoadingActionType => ({
+  type: GET_INITIAL_DATA,
+  loading: {
+    initialData: true,
+  },
 });
 
 function* getNowPlayingMoviesSaga() {
@@ -45,9 +41,27 @@ function* getPopularMoviesSaga() {
     console.error(error);
   }
 }
-export default function* rootSaga() {
+
+function* getGenreDataSaga() {
+  try {
+    const service = new MovieService();
+    const interactor = new MovieInteractor(service);
+
+    const genres = yield interactor.getMovieGenres();
+    yield put(updateGenreData(genres));
+  } catch (error) {
+    console.error(error);
+  }
+}
+function* getInitialDataSaga() {
   yield all([
-    takeLatest(GET_NOW_PLAYING_MOVIES, getNowPlayingMoviesSaga),
-    takeLatest(GET_POPULAR_MOVIES, getPopularMoviesSaga),
+    call(getNowPlayingMoviesSaga),
+    call(getPopularMoviesSaga),
+    call(getGenreDataSaga),
   ]);
+  yield put(updateInitialDataLoading(false));
+}
+
+export default function* rootSaga() {
+  yield all([takeLatest(GET_INITIAL_DATA, getInitialDataSaga)]);
 }

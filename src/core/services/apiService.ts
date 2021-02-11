@@ -1,5 +1,4 @@
-import {BASE_IMAGE_URL} from '../../configs/network';
-import {Movie} from '../entities';
+import {Genre, Movie} from '../entities';
 import {MovieApiService} from '../useCases';
 import Request from '../utils/request';
 
@@ -10,37 +9,24 @@ class MovieService implements MovieApiService {
     this.request = new Request();
   }
 
+  async getMovieGenres(): Promise<Genre[]> {
+    const response = await this.request.get('genre/movie/list');
+    const result = response.data.genres;
+    const genres = result.map((genre: any) => Genre.fromJson(genre));
+    return genres;
+  }
+
   async getNowPlayingMovies(): Promise<Movie[]> {
     const response = await this.request.get('movie/now_playing');
     const result = response.data.results;
-    const movies = result.map((movie: any) => {
-      const poster = `${BASE_IMAGE_URL}/w300/${movie.poster_path}`;
-      return new Movie(
-        movie.id,
-        movie.original_title,
-        movie.vote_average,
-        movie.overview,
-        poster,
-      );
-    });
-
+    const movies = result.map((movie: any) => Movie.fromJson(movie));
     return movies;
   }
 
   async getPopularMovies(): Promise<Movie[]> {
     const response = await this.request.get('movie/popular');
     const result = response.data.results;
-    const movies = result.map((movie: any) => {
-      const poster = `${BASE_IMAGE_URL}/w300/${movie.poster_path}`;
-      return new Movie(
-        movie.id,
-        movie.original_title,
-        movie.vote_average,
-        movie.overview,
-        poster,
-      );
-    });
-
+    const movies = result.map((movie: any) => Movie.fromJson(movie));
     return movies;
   }
 }
