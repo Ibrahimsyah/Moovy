@@ -3,6 +3,7 @@ import {Genre, Movie} from '../entities';
 export interface MovieApiService {
   getNowPlayingMovies: () => Promise<Movie[]>;
   getPopularMovies: () => Promise<Movie[]>;
+  getUpcomingMovies: () => Promise<Movie[]>;
   getMovieGenres: () => Promise<Genre[]>;
 }
 
@@ -21,6 +22,9 @@ export class MovieInteractor {
     return this.movieService.getPopularMovies();
   }
 
+  async getUpcomingMovies(): Promise<Movie[]> {
+    return this.movieService.getUpcomingMovies();
+  }
   async getMovieGenres(): Promise<Genre[]> {
     return this.movieService.getMovieGenres();
   }

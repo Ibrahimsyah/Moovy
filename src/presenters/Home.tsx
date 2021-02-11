@@ -1,14 +1,18 @@
 import React from 'react';
-import {Text, StyleSheet, FlatList, ScrollView} from 'react-native';
+import {Text, StyleSheet, FlatList, ScrollView, Dimensions} from 'react-native';
 import {useSelector} from 'react-redux';
+import Carousel from 'react-native-snap-carousel';
 import HorizontalMovieCard from '../components/HorizontalMovieCard';
 import VerticalMovieCard from '../components/VerticalMovieCard';
+import MovieCarouselItem from '../components/MovieCarouselItem';
 import {Colors} from '../configs/styles';
 import StateTypes from '../core/adapters/redux/reducers/stateTypes';
-
 import {Movie} from '../core/entities';
 
 export const HomePageRoute = 'home';
+
+const contentPadding = 16;
+const {width: viewportWidth} = Dimensions.get('window');
 
 const HomePage: React.FC = () => {
   const movies: StateTypes['movies'] = useSelector(
@@ -21,9 +25,20 @@ const HomePage: React.FC = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <Carousel
+        autoplay={true}
+        data={movies.upcoming}
+        loop={true}
+        sliderWidth={viewportWidth - 2 * contentPadding}
+        itemWidth={1 * (viewportWidth - 2 * contentPadding)}
+        renderItem={({item}: {item: Movie; index: number}) => (
+          <MovieCarouselItem movie={item} key={item.id} />
+        )}
+      />
+
       <Text style={styles.sectionTitle}>Now Playing</Text>
       <FlatList
-        style={styles.nowPlayingList}
+        showsHorizontalScrollIndicator={false}
         data={movies.nowPlaying}
         renderItem={renderNowPlaying}
         keyExtractor={(movie: Movie) => movie.id.toString()}
@@ -39,7 +54,7 @@ const HomePage: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16,
+    padding: contentPadding,
     flex: 1,
     backgroundColor: Colors.background,
   },
@@ -49,9 +64,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 16,
     marginTop: 32,
-  },
-  nowPlayingList: {
-    marginTop: 16,
   },
 });
 

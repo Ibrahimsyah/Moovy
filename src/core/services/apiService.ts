@@ -29,6 +29,13 @@ class MovieService implements MovieApiService {
     const movies = result.map((movie: any) => Movie.fromJson(movie));
     return movies;
   }
+
+  async getUpcomingMovies(): Promise<Movie[]> {
+    const response = await this.request.get('movie/upcoming');
+    const result = response.data.results;
+    const movies = result.map((movie: any) => Movie.fromJson(movie));
+    return movies;
+  }
 }
 
 export {MovieService};

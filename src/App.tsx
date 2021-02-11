@@ -6,11 +6,7 @@ import {configureStore} from './core/frameworks/redux';
 import {Colors} from './configs/styles';
 import Routes from './routes';
 
-type AppProps = {
-  name: string;
-};
-
-const App: React.FC<AppProps> = () => {
+const App: React.FC = () => {
   StatusBar.setBackgroundColor(Colors.background);
   const store = configureStore();
   return (
