@@ -10,6 +10,7 @@ class MovieDetail {
   tagline: string;
   vote: number;
   voteCount: number;
+  popularity: number;
   poster: string;
   homepage: string;
 
@@ -23,6 +24,7 @@ class MovieDetail {
     tagline: string,
     vote: number,
     voteCount: number,
+    popularity: number,
     poster: string,
     homepage: string,
   ) {
@@ -35,6 +37,7 @@ class MovieDetail {
     this.tagline = tagline;
     this.vote = vote;
     this.voteCount = voteCount;
+    this.popularity = popularity;
     this.poster = poster;
     this.homepage = homepage;
   }
@@ -53,6 +56,7 @@ class MovieDetail {
       json.tagline,
       json.vote_average,
       json.vote_count,
+      json.popularity,
       moviePoster,
       json.homepage,
     );

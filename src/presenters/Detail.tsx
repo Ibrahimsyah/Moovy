@@ -15,7 +15,6 @@ import {MovieService} from '../core/services/apiService';
 import {MovieInteractor} from '../core';
 import {Colors} from '../configs/styles';
 import {MovieDetail} from '../core/entities/movieDetail';
-import {StarIcon} from '../assets';
 import MovieGenreList from '../components/MovieGenreList';
 
 export const DetailPageRoute = 'detail';
@@ -68,9 +67,19 @@ const DetailPage: React.FC = () => {
         )}
         <View style={styles.bodyContainer}>
           <View style={styles.headContainer}>
-            <View>
-              <Image source={StarIcon} style={styles.starIcon} />
-              <Text style={styles.rating}>{movieDetail?.vote} / 10</Text>
+            <View style={styles.headGrid}>
+              <Text style={styles.popularity}>
+                {movieDetail?.popularity.toPrecision(5)}
+              </Text>
+              <Text style={styles.headText}>Popularity</Text>
+            </View>
+            <View style={styles.headGrid}>
+              <Text style={styles.rating}>{movieDetail?.vote}/10</Text>
+              <Text style={styles.headText}>Rating</Text>
+            </View>
+            <View style={styles.headGrid}>
+              <Text style={styles.duration}>{movieDetail?.runtime}min</Text>
+              <Text style={styles.headText}>Duration</Text>
             </View>
           </View>
           <Text style={styles.sectionTitle}>Overview</Text>
@@ -137,14 +146,34 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     fontFamily: 'Poppins-Regular',
   },
+  popularity: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 18,
+    color: Colors.greenText,
+  },
+  duration: {
+    fontFamily: 'Poppins-Medium',
+    fontSize: 18,
+    color: Colors.redText,
+  },
   rating: {
-    color: Colors.primaryText,
+    fontFamily: 'Poppins-Medium',
+    fontSize: 18,
+    color: Colors.yellowText,
+  },
+  headGrid: {
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headContainer: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+  },
+  headText: {
+    color: Colors.primaryText,
   },
   starIcon: {
     width: 20,
