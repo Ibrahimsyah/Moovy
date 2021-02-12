@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   Dimensions,
+  Linking,
 } from 'react-native';
 import {RouteProp, useRoute} from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -60,6 +61,9 @@ const DetailPage: React.FC = () => {
               style={styles.linearGradient}
             />
             <View style={styles.posterBottomBar}>
+              <Text style={styles.year}>
+                {movieDetail?.releaseDate.getFullYear()}
+              </Text>
               <Text style={styles.title}>{movieDetail?.title}</Text>
               <MovieGenreList genres={movieDetail?.genres || []} />
             </View>
@@ -82,8 +86,23 @@ const DetailPage: React.FC = () => {
               <Text style={styles.headText}>Duration</Text>
             </View>
           </View>
+          <Text style={StyleSheet.flatten([styles.content, styles.tagline])}>
+            {movieDetail?.tagline}
+          </Text>
           <Text style={styles.sectionTitle}>Overview</Text>
           <Text style={styles.content}>{movieDetail?.overview}</Text>
+          <Text style={styles.sectionTitle}>Status</Text>
+          <Text style={styles.content}>{movieDetail?.status}</Text>
+          {movieDetail?.homepage !== '' && (
+            <>
+              <Text style={styles.sectionTitle}>Homepage</Text>
+              <Text
+                style={StyleSheet.flatten([styles.content, styles.link])}
+                onPress={() => Linking.openURL(movieDetail?.homepage!!)}>
+                {movieDetail?.homepage!!}
+              </Text>
+            </>
+          )}
         </View>
       </ScrollView>
     </>
@@ -122,6 +141,12 @@ const styles = StyleSheet.create({
     left: 20,
     right: 20,
   },
+  year: {
+    color: Colors.primaryText,
+    fontFamily: 'Poppins-Medium',
+    fontSize: 14,
+    marginBottom: -5,
+  },
   title: {
     color: Colors.primaryText,
     fontFamily: 'Poppins-Medium',
@@ -138,13 +163,21 @@ const styles = StyleSheet.create({
     color: Colors.primaryText,
     fontFamily: 'Poppins-Medium',
     fontSize: 20,
-    marginTop: 32,
+    marginTop: 16,
   },
   content: {
     color: Colors.secondaryText,
     fontSize: 12,
     lineHeight: 22,
     fontFamily: 'Poppins-Regular',
+  },
+  link: {
+    textDecorationLine: 'underline',
+  },
+  tagline: {
+    marginTop: 16,
+    fontSize: 14,
+    fontStyle: 'italic',
   },
   popularity: {
     fontFamily: 'Poppins-Medium',
@@ -171,6 +204,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+    marginBottom: 16,
   },
   headText: {
     color: Colors.primaryText,

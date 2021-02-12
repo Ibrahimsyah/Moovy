@@ -24,6 +24,7 @@ const MovieGenreList: React.FC<MovieGenreListProps> = (props) => {
   return (
     <View style={styles.genresContainer}>
       <FlatList
+        showsHorizontalScrollIndicator={false}
         style={styles.genresContainer}
         horizontal={true}
         data={genres}
