@@ -1,7 +1,9 @@
 import React from 'react';
 import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {Colors} from '../configs/styles';
 import {Movie} from '../core';
+import {DetailPageRoute} from '../presenters/Detail';
 
 type HorizontalMovieCardProps = {
   movie: Movie;
@@ -9,10 +11,15 @@ type HorizontalMovieCardProps = {
 
 const HorizontalMovieCard: React.FC<HorizontalMovieCardProps> = (props) => {
   const {movie} = props;
+  const navigation = useNavigation();
+
+  const onMovieClick = () => {
+    navigation.navigate(DetailPageRoute, {
+      movieId: movie.id,
+    });
+  };
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => console.log(movie.title)}>
+    <TouchableOpacity style={styles.card} onPress={onMovieClick}>
       <Image source={{uri: movie.poster}} style={styles.thumbnail} />
       <Text style={styles.title}>{movie.title}</Text>
     </TouchableOpacity>

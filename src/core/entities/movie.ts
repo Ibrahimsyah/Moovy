@@ -9,7 +9,7 @@ class Movie {
   vote: number;
 
   static fromJson(json: any): Movie {
-    const poster = `${BASE_IMAGE_URL}/w300/${json.poster_path}`;
+    const poster = `${BASE_IMAGE_URL}w300${json.poster_path}`;
     return new Movie(
       json.id,
       json.original_title,

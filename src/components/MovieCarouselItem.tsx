@@ -1,7 +1,9 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Colors} from '../configs/styles';
 import {Movie} from '../core';
+import {DetailPageRoute} from '../presenters/Detail';
 
 type MovieCarouselItemProps = {
   movie: Movie;
@@ -9,10 +11,16 @@ type MovieCarouselItemProps = {
 
 const MovieCarouselItem: React.FC<MovieCarouselItemProps> = (props) => {
   const {movie} = props;
+
+  const navigation = useNavigation();
+  const onMovieClick = () => {
+    navigation.navigate(DetailPageRoute, {
+      movieId: movie.id,
+    });
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => console.log(movie.title)}>
+    <TouchableOpacity style={styles.card} onPress={onMovieClick}>
       <Image source={{uri: movie.poster}} style={styles.thumbnail} />
       <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
         {movie.title}

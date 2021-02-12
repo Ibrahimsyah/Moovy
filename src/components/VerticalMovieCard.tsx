@@ -2,7 +2,9 @@ import React from 'react';
 import {Text, StyleSheet, Image, TouchableOpacity, View} from 'react-native';
 import {Colors} from '../configs/styles';
 import {Movie} from '../core';
-const StarIcon = require('../assets/icons/star.png');
+import {StarIcon} from '../assets';
+import {DetailPageRoute} from '../presenters/Detail';
+import {useNavigation} from '@react-navigation/native';
 
 type VerticalMovieCardProps = {
   movie: Movie;
@@ -10,10 +12,15 @@ type VerticalMovieCardProps = {
 
 const VerticalMovieCard: React.FC<VerticalMovieCardProps> = (props) => {
   const {movie} = props;
+
+  const navigation = useNavigation();
+  const onMovieClick = () => {
+    navigation.navigate(DetailPageRoute, {
+      movieId: movie.id,
+    });
+  };
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => console.log(movie.title)}>
+    <TouchableOpacity style={styles.card} onPress={onMovieClick}>
       <Image source={{uri: movie.poster}} style={styles.thumbnail} />
       <View style={styles.movieDetail}>
         <Text style={styles.title} numberOfLines={3} ellipsizeMode="tail">

@@ -1,4 +1,5 @@
 import {Genre, Movie} from '../entities';
+import {MovieDetail} from '../entities/movieDetail';
 import {MovieApiService} from '../useCases';
 import Request from '../utils/request';
 
@@ -35,6 +36,13 @@ class MovieService implements MovieApiService {
     const result = response.data.results;
     const movies = result.map((movie: any) => Movie.fromJson(movie));
     return movies;
+  }
+
+  async getMovieDetail(movieId: number): Promise<MovieDetail> {
+    const response = await this.request.get(`movie/${movieId}`);
+    const result = response.data;
+    const movieDetail = MovieDetail.fromJson(result);
+    return movieDetail;
   }
 }
 

@@ -8,7 +8,6 @@ import {
   updatePopularMovies,
   updateUpcomingMovie,
 } from '../actions';
-import {updateGenreData} from '../actions/genre';
 
 const GET_INITIAL_DATA = 'GET_INITIAL_DATA';
 
@@ -55,23 +54,11 @@ function* getUpcomingMoviesSaga() {
   }
 }
 
-function* getGenreDataSaga() {
-  try {
-    const service = new MovieService();
-    const interactor = new MovieInteractor(service);
-
-    const genres = yield interactor.getMovieGenres();
-    yield put(updateGenreData(genres));
-  } catch (error) {
-    console.error(error);
-  }
-}
 function* getInitialDataSaga() {
   yield all([
     call(getNowPlayingMoviesSaga),
     call(getPopularMoviesSaga),
     call(getUpcomingMoviesSaga),
-    call(getGenreDataSaga),
   ]);
   yield put(updateInitialDataLoading(false));
 }
