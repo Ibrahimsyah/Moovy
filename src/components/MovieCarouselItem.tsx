@@ -3,13 +3,13 @@ import React from 'react';
 import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Colors} from '../configs/styles';
 import {Movie} from '../core';
-import {DetailPageRoute} from '../presenters/Detail';
+import {DetailPageRoute} from '../presentation/Detail';
 
 type MovieCarouselItemProps = {
   movie: Movie;
 };
 
-const MovieCarouselItem: React.FC<MovieCarouselItemProps> = (props) => {
+const MovieCarouselItem: React.FC<MovieCarouselItemProps> = props => {
   const {movie} = props;
 
   const navigation = useNavigation();

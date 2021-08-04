@@ -3,13 +3,13 @@ import {Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Colors} from '../configs/styles';
 import {Movie} from '../core';
-import {DetailPageRoute} from '../presenters/Detail';
+import {DetailPageRoute} from '../presentation/Detail';
 
 type HorizontalMovieCardProps = {
   movie: Movie;
 };
 
-const HorizontalMovieCard: React.FC<HorizontalMovieCardProps> = (props) => {
+const HorizontalMovieCard: React.FC<HorizontalMovieCardProps> = props => {
   const {movie} = props;
   const navigation = useNavigation();
 

@@ -3,14 +3,14 @@ import {Text, StyleSheet, Image, TouchableOpacity, View} from 'react-native';
 import {Colors} from '../configs/styles';
 import {Movie} from '../core';
 import {StarIcon} from '../assets';
-import {DetailPageRoute} from '../presenters/Detail';
+import {DetailPageRoute} from '../presentation/Detail';
 import {useNavigation} from '@react-navigation/native';
 
 type VerticalMovieCardProps = {
   movie: Movie;
 };
 
-const VerticalMovieCard: React.FC<VerticalMovieCardProps> = (props) => {
+const VerticalMovieCard: React.FC<VerticalMovieCardProps> = props => {
   const {movie} = props;
 
   const navigation = useNavigation();

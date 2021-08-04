@@ -1,9 +1,9 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomePage, {HomePageRoute} from '../presenters/Home';
-import SplashPage, {SplashPageRoute} from '../presenters/Splash';
-import DetailPage, {DetailPageRoute} from '../presenters/Detail';
+import HomePage, {HomePageRoute} from '../presentation/Home';
+import SplashPage, {SplashPageRoute} from '../presentation/Splash';
+import DetailPage, {DetailPageRoute} from '../presentation/Detail';
 
 const Stack = createStackNavigator<ParamsTypes>();
 
