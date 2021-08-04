@@ -12,3 +12,8 @@ There are so many architecture guides that we can follow when building an app, o
 - Axios for HTTP Client Library
 - Redux for state management library
 - Redux-saga as redux middleware to handle asynchronous action
+
+## Result
+![Main Screen](/thumbnails/home.png)
+
+![Detail Screen](/thumbnails/detail.png)
